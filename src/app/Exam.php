@@ -16,28 +16,21 @@ class Exam
     // 接続方法は、、、、、そうですよね、設定ファイル見れば良いので書く必要ないですね
     // 
     // 動作確認方法
-    // phpfpmコンテナで以下のコマンドを実行
-    // ./vendor/bin/phpunit
-    // 
+    // docker exec -it <phpfpmコンテナのID> vendor/bin/phpunit
     // 
     // 以下実行時のイメージ（全部正解）
-    // root@df452a6ee04d:/work/backend# vendor/bin/phpunit
+    // kotani@ap-kotani:~/checktest_ph3_test3-master$ docker exec -it 07785cc5eb5a vendor/bin/phpunit
     // 〜〜〜（省略）〜〜〜
     // OK (6 tests, 6 assertions)
-    // root@df452a6ee04d:/work/backend#
+    // kotani@ap-kotani:~/checktest_ph3_test3-master$
     // 
     // 
     // 以下実行時のイメージ（1問不正解）
-    // root@df452a6ee04d:/work/backend# vendor/bin/phpunit
+    // kotani@ap-kotani:~/checktest_ph3_test3-master$ docker exec -it 07785cc5eb5a vendor/bin/phpunit
     // 〜〜〜（省略）〜〜〜
     // FAILURES!
     // Tests: 6, Assertions: 6, Failures: 1.
-    // root@df452a6ee04d:/work/backend#
-
-    // Time: 00:00.118, Memory: 18.00 MB
-
-    // OK (6 tests, 6 assertions)
-    // root@df452a6ee04d:/work/backend# 
+    // kotani@ap-kotani:~/checktest_ph3_test3-master$
 
     // サンプル
     // 条件：
