@@ -28,18 +28,18 @@ class ExamTest extends TestCase
     public function testCase3()
     {
         $exam = new Exam();
-        $this->assertEquals($exam->Case3(), 998);
+        $this->assertEquals($exam->Case3(), 989);
     }
 
     public function testCase4()
     {
         $exam = new Exam();
-        $this->assertEquals($exam->Case4(), '営業部');
+        $this->assertEquals($exam->Case4(), '開発部');
     }
 
     public function testCase5()
     {
         $exam = new Exam();
-        $this->assertEquals($exam->Case5(), '青田 晃');
+        $this->assertEquals($exam->Case5(), '喜嶋 知実');
     }
 }
