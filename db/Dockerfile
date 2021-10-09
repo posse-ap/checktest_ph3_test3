@@ -1,7 +1,5 @@
 FROM mysql:8.0
 
-RUN apt-get update && apt-get install -y locales  
-RUN sed -i -E 's/# (ja\_JP.UTF-8)/\\1/' /etc/locale.gen && locale-gen  
-ENV LANG ja\_JP.UTF-8
+ENV TZ=UTC
 
-COPY ./export_20211009.dmp /
+COPY ./etc/my.cnf /etc/my.cnf

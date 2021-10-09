@@ -4,6 +4,8 @@ services:
   mysql:
     build:
       context: ./db
+    volumes:
+      - ./db/var/lib/mysql:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=laravel
       - MYSQL_USER=laravel
