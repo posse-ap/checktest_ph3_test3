@@ -99,7 +99,7 @@ class Exam
     // 　クエリビルダのみで結果を取得してください
     // 採点：
     // 　結果がOK：5点
-    // 　＋rawについては、selectRaw1回のみ使っている：10点
+    // 　＋rawについては1回のみ使っている(selectRaw, orderByRawなど)：10点
     // 　＋クエリビルダで結果を取得している：5点
     public function Case4()
     {
