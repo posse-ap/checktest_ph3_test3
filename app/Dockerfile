@@ -1,30 +1,20 @@
-FROM php:7.4-fpm-buster
-LABEL maintainer="ucan-lab <yes@u-can.pro>"
-SHELL ["/bin/bash", "-oeux", "pipefail", "-c"]
+FROM devilbox/php-fpm-8.1:latest
+COPY php.ini /usr/local/etc/php/
 
-# timezone environment
-ENV TZ=UTC \
-  # locale
-  LANG=en_US.UTF-8 \
-  LANGUAGE=en_US:en \
-  LC_ALL=en_US.UTF-8 \
-  # composer environment
-  COMPOSER_ALLOW_SUPERUSER=1 \
-  COMPOSER_HOME=/composer
+RUN apt-get update \
+  && apt-get install -y libzip-dev zlib1g-dev unzip libpq-dev \
+  && docker-php-ext-install zip
 
-COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
+RUN apt-get install -y vim \
+  && docker-php-ext-install sockets pdo_mysql \
+  && pecl install xdebug \
+  && docker-php-ext-enable xdebug
 
-RUN apt-get update && \
-  apt-get -y install git libicu-dev libonig-dev libzip-dev unzip locales cron vim && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  locale-gen en_US.UTF-8 && \
-  localedef -f UTF-8 -i en_US en_US.UTF-8 && \
-  mkdir /var/run/php-fpm && \
-  docker-php-ext-install intl pdo_mysql zip bcmath && \
-  composer config -g process-timeout 3600 && \
-  composer config -g repos.packagist composer https://packagist.org
-
-COPY ./usr/local/etc/php/php.ini /usr/local/etc/php/php.ini
+# Composer2.0 install
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer self-update --2
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
 
 WORKDIR /work/backend
